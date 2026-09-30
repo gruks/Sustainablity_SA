@@ -7,8 +7,8 @@ export async function POST() {
   return res;
 }
 
-export async function GET() {
-  const res = NextResponse.redirect(new URL("/login", process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"));
+export async function GET(req: Request) {
+  const res = NextResponse.redirect(new URL("/login", req.url));
   res.headers.set("Set-Cookie", buildLogoutCookieHeader());
   return res;
 }

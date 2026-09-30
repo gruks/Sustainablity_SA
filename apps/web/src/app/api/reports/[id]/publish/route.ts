@@ -18,7 +18,11 @@ export async function POST(
   let pdfPublicId = `pluribus/reports/${report.id}`;
 
   try {
-    const res = await fetch(`${renderServiceUrl}/render/upload`, {
+    const targetUrl = new URL(
+      "render/upload",
+      renderServiceUrl.endsWith("/") ? renderServiceUrl : `${renderServiceUrl}/`
+    );
+    const res = await fetch(targetUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
